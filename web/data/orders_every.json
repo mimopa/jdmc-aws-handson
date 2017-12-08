@@ -1,0 +1,417 @@
+[
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:35:03 UTC",
+                "memo": "",
+                "value": 174.5874489219364,
+                "unit": "degree",
+                "north": "true"
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:35:03 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.9879636764526367,
+                    -7.939172744750977,
+                    1.1971008777618408
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_10",
+            "data_class_name": "Location",
+            "data": {
+                "at": "2017-12-05 23:29:45 UTC",
+                "memo": "",
+                "location": {
+                    "latitude": 35.6818248,
+                    "longitude": 139.7667082,
+                    "elevation": 58.595985733288266,
+                    "datum": "WGS84"
+                },
+                "unit": "WGS84",
+                "values": [
+                    35.6818248,
+                    139.7667082
+                ]
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:32:01 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    -0.22026655077934265,
+                    -4.750096321105957,
+                    1.9153614044189453
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:32:01 UTC",
+                "memo": "",
+                "value": -102.43211475624945,
+                "unit": "degree",
+                "north": "true"
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:29:02 UTC",
+                "memo": "",
+                "value": -177.69015797506307,
+                "unit": "degree",
+                "north": "true"
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:29:01 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    0.871489405632019,
+                    -4.750096321105957,
+                    1.6950948238372803
+                ]
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:26:01 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.4612393379211426,
+                    -9.155426979064941,
+                    0.9002198576927185
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:26:01 UTC",
+                "memo": "",
+                "value": -4.638077521937594,
+                "unit": "degree",
+                "north": "true"
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_10",
+            "data_class_name": "Location",
+            "data": {
+                "at": "2017-12-05 23:14:25 UTC",
+                "memo": "",
+                "location": {
+                    "latitude": 35.731519,
+                    "longitude": 139.7672774,
+                    "elevation": 53.400001525878906,
+                    "datum": "WGS84"
+                },
+                "unit": "WGS84",
+                "values": [
+                    35.731519,
+                    139.7672774
+                ]
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:23:03 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.738966703414917,
+                    -9.069235801696777,
+                    0.9959878921508789
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:23:03 UTC",
+                "memo": "",
+                "value": -57.057047326117456,
+                "unit": "degree",
+                "north": "true"
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:20:03 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.4899697303771973,
+                    -9.232041358947754,
+                    0.7661445140838623
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:20:03 UTC",
+                "memo": "",
+                "value": 98.49631386967798,
+                "unit": "degree",
+                "north": "true"
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:17:02 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.4899697303771973,
+                    -9.193734169006348,
+                    1.7334020137786865
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:17:02 UTC",
+                "memo": "",
+                "value": 36.127158633569394,
+                "unit": "degree",
+                "north": "true"
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:14:01 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.365471363067627,
+                    -9.126696586608887,
+                    1.7908629179000854
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_13",
+            "data_class_name": "AngularVelocity",
+            "data": {
+                "at": "2017-12-05 23:14:01 UTC",
+                "memo": "",
+                "unit": "deg/s",
+                "values": [
+                    0.1662500060492838,
+                    -0.12250000305313404,
+                    -0.05906250004273821
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:14:01 UTC",
+                "memo": "",
+                "value": -51.75367522807477,
+                "unit": "degree",
+                "north": "true"
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_13",
+            "data_class_name": "AngularVelocity",
+            "data": {
+                "at": "2017-12-05 23:11:21 UTC",
+                "memo": "",
+                "unit": "deg/s",
+                "values": [
+                    -0.8509375169204518,
+                    3.2790626165056973,
+                    0.38281249286577734
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:11:21 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.5761611461639404,
+                    -8.973467826843262,
+                    0.7086837291717529
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:11:21 UTC",
+                "memo": "",
+                "value": 106.12428279512656,
+                "unit": "degree",
+                "north": "true"
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_10",
+            "data_class_name": "Location",
+            "data": {
+                "at": "2017-12-05 23:11:32 UTC",
+                "memo": "",
+                "location": {
+                    "latitude": 35.7385438,
+                    "longitude": 139.7608239,
+                    "elevation": 0,
+                    "datum": "WGS84"
+                },
+                "unit": "WGS84",
+                "values": [
+                    35.7385438,
+                    139.7608239
+                ]
+            }
+        }
+    ],
+    [
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_13",
+            "data_class_name": "AngularVelocity",
+            "data": {
+                "at": "2017-12-05 23:08:01 UTC",
+                "memo": "",
+                "unit": "deg/s",
+                "values": [
+                    -0.6671874990005375,
+                    0.5249999825929442,
+                    0.0874999993221929
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_12",
+            "data_class_name": "Direction",
+            "data": {
+                "at": "2017-12-05 23:08:01 UTC",
+                "memo": "",
+                "value": 116.30306782838645,
+                "unit": "degree",
+                "north": "true"
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_14",
+            "data_class_name": "Accelerometer",
+            "data": {
+                "at": "2017-12-05 23:08:01 UTC",
+                "memo": "",
+                "unit": "m/s^2",
+                "values": [
+                    2.4229321479797363,
+                    -9.193734169006348,
+                    1.0821791887283325
+                ]
+            }
+        },
+        {
+            "farm_uuid": "315564dc-5ee0-410e-857c-ac64aaee6c88",
+            "sensor_name": "collection_data_10",
+            "data_class_name": "Location",
+            "data": {
+                "at": "2017-12-05 23:08:10 UTC",
+                "memo": "",
+                "location": {
+                    "latitude": 35.7337072,
+                    "longitude": 139.7402592,
+                    "elevation": 0,
+                    "datum": "WGS84"
+                },
+                "unit": "WGS84",
+                "values": [
+                    35.7337072,
+                    139.7402592
+                ]
+            }
+        }
+    ]
+]

@@ -1,0 +1,448 @@
+[
+    [
+        {
+            "data": {
+                "at": "2017-11-29 03:56:11 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -29.778706120812227
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 03:56:16 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 78.96415795992188, 
+                    "latitude": 35.6834859, 
+                    "longitude": 139.7697479
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6834859, 
+                    139.7697479
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 03:46:03 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -71.77823259142139
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 03:46:13 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 0.0, 
+                    "latitude": 35.6827603, 
+                    "longitude": 139.7670276
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6827603, 
+                    139.7670276
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 03:36:11 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -36.29424555123541
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 03:36:22 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 190.1049463124055, 
+                    "latitude": 35.6843928, 
+                    "longitude": 139.767905
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6843928, 
+                    139.767905
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 03:26:12 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -83.6798645409253
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 02:46:06 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 86.00358677906912, 
+                    "latitude": 35.6716128, 
+                    "longitude": 139.7166807
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6716128, 
+                    139.7166807
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 03:16:11 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -84.14888680104089
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 03:06:12 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -103.65519673092363
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 02:56:15 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -2.2547218577625485
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 02:46:02 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -48.02199454484913
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 02:36:03 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -47.581119494303145
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 02:36:05 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 117.29898640584891, 
+                    "latitude": 35.6716249, 
+                    "longitude": 139.7166859
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6716249, 
+                    139.7166859
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 02:26:01 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -47.59662060862449
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 02:26:21 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 135.14672311865255, 
+                    "latitude": 35.6715498, 
+                    "longitude": 139.7166931
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6715498, 
+                    139.7166931
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 02:16:11 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -47.62226796895789
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 02:16:54 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 114.04762582425612, 
+                    "latitude": 35.6721838, 
+                    "longitude": 139.7165615
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6721838, 
+                    139.7165615
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 02:06:01 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": -88.12970546443192
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "data": {
+                "at": "2017-11-29 01:46:20 UTC", 
+                "location": {
+                    "datum": "WGS84", 
+                    "elevation": 72.9000015258789, 
+                    "latitude": 35.6714617, 
+                    "longitude": 139.7171159
+                }, 
+                "memo": "", 
+                "unit": "WGS84", 
+                "values": [
+                    35.6714617, 
+                    139.7171159
+                ]
+            }, 
+            "data_class_name": "Location", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_10"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ], 
+    [
+        {
+            "data": {
+                "at": "2017-11-29 01:46:11 UTC", 
+                "memo": "", 
+                "north": "true", 
+                "unit": "degree", 
+                "value": 169.8353311465217
+            }, 
+            "data_class_name": "Direction", 
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "sensor_name": "collection_data_12"
+        }, 
+        {
+            "farm_uuid": "199c5bcd-09ed-456b-ae2a-654d87ea5cbd", 
+            "shared_secret": "", 
+            "設置位置": null, 
+            "設置場所": null, 
+            "設置場所種別": "移動", 
+            "設置場所詳細": null
+        }
+    ]
+]

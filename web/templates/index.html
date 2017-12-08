@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>データ取得</h1>
+<!-- Form -->
+<div class="row">
+    {% from "_formhelpers.html" import render_field %}
+    <form action="/post" method="POST" action={{ url_for( 'post') }} enctype="multipart/form-data">
+        <fieldset>
+            {{ render_field(form.input_login_name) }}
+            {{ render_field(form.input_login_pass) }}
+            <input class="btn btn-primary btn-lg" type="submit" value="データ取得"  />
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

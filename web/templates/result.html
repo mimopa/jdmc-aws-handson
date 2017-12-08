@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>データ一覧</h1>
+<div class="row">
+    {% from "_formhelpers.html" import render_field %}
+    <blockquote>
+        <p>{{ name }} さんが収集したデータを受け取りました</p>
+    </blockquote>
+</div>
+<div class="row">
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+            <th>時刻</th>
+            <th>経度</th>
+            <th>緯度</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in output %}
+            <tr class="table-info">
+            <td>{{ item[0].at }}</td>
+            <td>{{ item[0].location.latitude }}</td>
+            <td>{{ item[0].location.longitude }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!--
+ここにresult.html独自の要素を記入
+-->
+{% endblock %}
