@@ -15,7 +15,7 @@ db = client['jdmcaws']
 coll = db['orders']
 
 # レシピUUID：固定
-RECIPIE_UUID = 'your recipie UUID'
+RECIPIE_UUID = ''
 EVS_ROOT_URL = 'https://api.every-sense.com:8001/get_output_data'
 
 # フォームデータを保持するクラス
@@ -54,7 +54,7 @@ def make_EVS_request(params=None,recipie_UUID=RECIPIE_UUID,root_dir=EVS_ROOT_URL
     # POSTリクエスト作成
     params['recipe_uuid'] = recipie_UUID
     params['keep'] = 'true'
-    params['limit'] = 10
+    params['limit'] = 20
     params['format'] = 'JSON'
     params['from'] = '2017-12-01 12:00:01 UTC'
     params['to'] = '2017-12-08 12:10:00 UTC'
@@ -64,15 +64,21 @@ def make_EVS_request(params=None,recipie_UUID=RECIPIE_UUID,root_dir=EVS_ROOT_URL
 
 def retrieve_json_date(response):
     # レスポンスからデータ抜き出し
+    # ToDo：ファームUUIDの取得により、可視化時に自分（特定）のデータを選択可能とする
     everypost_orders = response.json()
     parent_count = len(everypost_orders)
-    out_dict = []
+    out_list = []
     for m in range(0,parent_count):
         child_count = len(everypost_orders[m])
         for n in range(0,child_count):
+            out_dict = {}
             if everypost_orders[m][n]['data_class_name'] == 'Location':
-                out_dict.append([everypost_orders[m][n]['data']])
-    return(out_dict)
+                out_dict = everypost_orders[m][n]['data']
+                out_dict['farm_uuid'] = everypost_orders[m][n]['farm_uuid']
+#                print(out_dict)
+#                out_list.append([everypost_orders[m][n]['data']])
+                out_list.append([out_dict])
+    return(out_list)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=False)

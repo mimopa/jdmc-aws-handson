@@ -14,7 +14,8 @@
             <th>時刻</th>
             <th>経度</th>
             <th>緯度</th>
-            </tr>
+            <th>ファーム情報</th>
+        </tr>
         </thead>
         <tbody>
             {% for item in output %}
@@ -22,7 +23,8 @@
             <td>{{ item[0].at }}</td>
             <td>{{ item[0].location.latitude }}</td>
             <td>{{ item[0].location.longitude }}</td>
-            </tr>
+            <td>{{ item[0].farm_uuid }}</td>
+        </tr>
             {% endfor %}
         </tbody>
     </table>
