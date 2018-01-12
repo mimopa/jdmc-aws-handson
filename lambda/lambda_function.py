@@ -28,19 +28,17 @@ def next_seq(table, tablename):
         ReturnValues='UPDATED_NEW'
     )
     return response['Attributes']['seq']
-    
+
+# Lambda関数呼び出し時に最初に呼ばれる関数
 def everypost_handler(event, context):
     try:
-        # シーケンスデータを得る
+        # DynamoDBのテーブルインスタンス作成(sequenceテーブル)
         seqtable = dynamodb.Table('sequence')
-        #nextseq = next_seq(seqtable, 'sensordata')
         
-        # デバッグ
-        #print(json.dumps(event, indent=4))
-        #print(type(event['body']))
         # フォームに入力されたデータを得る
         param = urllib.parse.parse_qs(event['body'])
         # paramが取得取得できなかった場合、JSONとして処理処理しないとだめ？
+        # HTMLのWebフォームからPOSTした場合と、AJAXでPOST（JSON形式）した場合で取得方法が異なるっぽい
         if param == "" and isinstance(event['body'], str):
             body = json.loads(event['body'])
             input_login_name = body['input_login_name']
@@ -59,7 +57,7 @@ def everypost_handler(event, context):
         # レスポンスから、JSONデータを解析
         output = retrieve_json_date(response)
         
-        # sensordataテーブルに登録する
+        # DynamoDBのテーブルインスタンス作成(sensordataテーブル)
         sensortable = dynamodb.Table("sensordata")
         
         # outputに格納されているList分、繰り返して登録する（batch_writer()を利用）
@@ -80,13 +78,12 @@ def everypost_handler(event, context):
                 )
         
         # 結果を返す
-        # ToDo:結果jsonで返却できるか調査する
         return {
             'statusCode' : 200,
             'headers' : {
                 'content-type' : 'text/html'
             },
-            'body' : '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>登録ありがとうございました。<a href="http://jdmchandson001.s3-website-ap-northeast-1.amazonaws.com/">戻る </a></body></html>'
+            'body' : '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>データ取得が完了しました。次は可視化してみましょう！</br><a href="http://jdmchandson001.s3-website-ap-northeast-1.amazonaws.com/">戻る </a></body></html>'
         }
     except:
         import traceback
@@ -106,10 +103,10 @@ def make_EVS_request(params=None,recipie_UUID=RECIPIE_UUID,root_dir=EVS_ROOT_URL
     # POSTリクエスト作成
     params['recipe_uuid'] = recipie_UUID
     params['keep'] = 'true'
-    params['limit'] = 50
+    params['limit'] = 2000
     params['format'] = 'JSON'
-    params['from'] = '2017-12-28 12:00:00 UTC'
-    params['to'] = '2018-03-30 12:10:00 UTC'
+    params['from'] = '2017-12-28 15:00:00 UTC'
+    params['to'] = '2018-03-31 23:10:00 UTC'
     json_param = json.dumps(params).encode('utf-8')
     every_response = requests.post(root_dir, data=json_param,headers={'Content-Type': 'application/json'})
     return every_response
@@ -119,6 +116,7 @@ def retrieve_json_date(response):
     # ToDo：ファームUUIDの取得により、可視化時に自分（特定）のデータを選択可能とする
     everypost_orders = response.json()
     parent_count = len(everypost_orders)
+    print(parent_count)
     out_list = []
     for m in range(0,parent_count):
         child_count = len(everypost_orders[m])
