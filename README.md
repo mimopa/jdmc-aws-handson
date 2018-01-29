@@ -23,11 +23,9 @@
 Android、iPhoneそれぞれについてインストール方法は下記を参照してください。
 
 * Android版（ESpost2）  
-https://github.com/every-sense/UserDocument/wiki/EveryPost(ESpost)iPhone%E7%89%88%E5%8F%96%E3%82%8A%E6%89%B1%E3%81%84%E8%AA%AC%E6%98%8E%E6%9B%B8#sec1-1
-
-* iPhone版（ESpost）  
 https://github.com/every-sense/UserDocument/wiki/EveryPost(ESpost2)-Android%E7%89%88%E5%8F%96%E3%82%8A%E6%89%B1%E3%81%84%E8%AA%AC%E6%98%8E%E6%9B%B8#sec1-install
-
+* iPhone版（ESpost）  
+https://github.com/every-sense/UserDocument/wiki/EveryPost(ESpost)iPhone%E7%89%88%E5%8F%96%E3%82%8A%E6%89%B1%E3%81%84%E8%AA%AC%E6%98%8E%E6%9B%B8#sec1-1
 ### オーナー情報の登録
 インストール後、オーナー登録のキーワード欄に「JDMCカンファレンス」と設定してください。
 ※下記マニュアル項番16「指定されたキーワードがあれば、入力します」を参照。
