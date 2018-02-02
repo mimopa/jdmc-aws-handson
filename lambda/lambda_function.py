@@ -4,6 +4,7 @@ import boto3
 import urllib
 import time
 import decimal
+import logging
 
 from datetime import datetime, timedelta, timezone
 from dateutil import parser
@@ -116,7 +117,6 @@ def retrieve_json_date(response):
     # ToDo：ファームUUIDの取得により、可視化時に自分（特定）のデータを選択可能とする
     everypost_orders = response.json()
     parent_count = len(everypost_orders)
-    print(parent_count)
     out_list = []
     for m in range(0,parent_count):
         child_count = len(everypost_orders[m])
