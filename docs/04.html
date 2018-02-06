@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #A31515;
+	font-size: inherit;
+	font-family: inherit;
+}
+
+</style>
+
+</head>
+<body>
+<h2>4. APIGatewayとLambda関数の設定</h2>
+<h3>4.1.コードのダウンロード</h3>
+<p>ダウンロード先は別途ご案内します。</p>
+<p>本セクションではコードの修正はありませんので、そのままLambdaに登録できます。コードのサンプルを下記に記載します。</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">import</span> requests
+<span class="hljs-keyword">import</span> boto3
+<span class="hljs-keyword">import</span> urllib
+<span class="hljs-keyword">import</span> time
+<span class="hljs-keyword">import</span> decimal
+
+<span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> datetime, timedelta, timezone
+<span class="hljs-keyword">from</span> dateutil <span class="hljs-keyword">import</span> parser
+
+dynamodb = boto3.resource(<span class="hljs-string">'dynamodb'</span>)
+EVS_ROOT_URL = <span class="hljs-string">'https://api.every-sense.com:8001/get_output_data'</span>
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">next_seq</span><span class="hljs-params">(table, tablename)</span>:</span>
+
+    response = table.update_item(
+        Key={
+            <span class="hljs-string">'tablename'</span> : tablename
+        },
+        UpdateExpression=<span class="hljs-string">"set seq = seq + :val"</span>,
+        ExpressionAttributeValues= {
+            <span class="hljs-string">':val'</span> : <span class="hljs-number">1</span>
+        },
+        ReturnValues=<span class="hljs-string">'UPDATED_NEW'</span>
+    )
+    <span class="hljs-keyword">return</span> response[<span class="hljs-string">'Attributes'</span>][<span class="hljs-string">'seq'</span>]
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">everypost_handler</span><span class="hljs-params">(event, context)</span>:</span>
+    <span class="hljs-keyword">try</span>:
+        seqtable = dynamodb.Table(<span class="hljs-string">'sequence'</span>)
+        
+        param = urllib.parse.parse_qs(event[<span class="hljs-string">'body'</span>])
+
+        <span class="hljs-keyword">if</span> param == <span class="hljs-string">""</span> <span class="hljs-keyword">and</span> isinstance(event[<span class="hljs-string">'body'</span>], str):
+            body = json.loads(event[<span class="hljs-string">'body'</span>])
+            recipe_uuid = body[<span class="hljs-string">'recipe_uuid'</span>]
+            session_key = body[<span class="hljs-string">'session_key'</span>]
+        <span class="hljs-keyword">else</span>:
+            recipe_uuid = param[<span class="hljs-string">'recipe_uuid'</span>]
+            session_key = param[<span class="hljs-string">'session_key'</span>]
+        
+        response = make_EVS_request(
+            {<span class="hljs-string">"session_key"</span> : session_key, <span class="hljs-string">"recipe_uuid"</span> : recipe_uuid}
+        )
+        output = retrieve_json_date(response)
+        
+        sensortable = dynamodb.Table(<span class="hljs-string">"sensordata"</span>)
+        
+        <span class="hljs-keyword">with</span> sensortable.batch_writer() <span class="hljs-keyword">as</span> batch:
+            <span class="hljs-keyword">for</span> outItem <span class="hljs-keyword">in</span> output:
+                jst_time = parser.parse(outItem[<span class="hljs-number">0</span>][<span class="hljs-string">'at'</span>]).astimezone(timezone(timedelta(hours=+<span class="hljs-number">9</span>), <span class="hljs-string">'JST'</span>))
+                jst_time_str = datetime.strftime(jst_time, <span class="hljs-string">'%Y-%m-%d %H:%M:%S'</span>)
+                
+                batch.put_item(
+                    Item={
+                        <span class="hljs-string">'id'</span> : next_seq(seqtable, <span class="hljs-string">'sensordata'</span>),
+                        <span class="hljs-string">'farm_uuid'</span> : outItem[<span class="hljs-number">0</span>][<span class="hljs-string">'farm_uuid'</span>],
+                        <span class="hljs-string">'at'</span> : jst_time_str,
+                        <span class="hljs-string">'latitude'</span> : decimal.Decimal(str(outItem[<span class="hljs-number">0</span>][<span class="hljs-string">'location'</span>][<span class="hljs-string">'latitude'</span>])),
+                        <span class="hljs-string">'longitude'</span> : decimal.Decimal(str(outItem[<span class="hljs-number">0</span>][<span class="hljs-string">'location'</span>][<span class="hljs-string">'longitude'</span>]))
+                    }
+                )
+        
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-string">'statusCode'</span> : <span class="hljs-number">200</span>,
+            <span class="hljs-string">'headers'</span> : {
+                <span class="hljs-string">'content-type'</span> : <span class="hljs-string">'text/html'</span>
+            },
+            <span class="hljs-string">'body'</span> : <span class="hljs-string">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;/head&gt;&lt;body&gt;データ取得が完了しました。次は可視化してみましょう！&lt;/br&gt;&lt;a href="http://jdmchandson001.s3-website-ap-northeast-1.amazonaws.com/"&gt;戻る &lt;/a&gt;&lt;/body&gt;&lt;/html&gt;'</span>
+        }
+    <span class="hljs-keyword">except</span>:
+        <span class="hljs-keyword">import</span> traceback
+        traceback.print_exc()
+        <span class="hljs-keyword">return</span> {
+            <span class="hljs-string">'statusCode'</span> : <span class="hljs-number">500</span>,
+            <span class="hljs-string">'headers'</span> : {
+                <span class="hljs-string">'content-type'</span> : <span class="hljs-string">'text/html'</span>
+            },
+            <span class="hljs-string">'body'</span> : <span class="hljs-string">'&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset="UTF-8"&gt;&lt;/head&gt;&lt;body&gt;内部エラーが発生しました。&lt;/body&gt;&lt;/html&gt;'</span>
+        }
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">make_EVS_request</span><span class="hljs-params">(params=None,root_dir=EVS_ROOT_URL)</span>:</span>
+
+    <span class="hljs-keyword">if</span> params <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span>:
+        params = {}
+    params[<span class="hljs-string">'keep'</span>] = <span class="hljs-string">'true'</span>
+    params[<span class="hljs-string">'limit'</span>] = <span class="hljs-number">2000</span>
+    params[<span class="hljs-string">'format'</span>] = <span class="hljs-string">'JSON'</span>
+    params[<span class="hljs-string">'from'</span>] = <span class="hljs-string">'2017-12-28 15:00:00 UTC'</span>
+    params[<span class="hljs-string">'to'</span>] = <span class="hljs-string">'2018-03-31 23:10:00 UTC'</span>
+    json_param = json.dumps(params).encode(<span class="hljs-string">'utf-8'</span>)
+    every_response = requests.post(root_dir, data=json_param,headers={<span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span>})
+    <span class="hljs-keyword">return</span> every_response
+
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">retrieve_json_date</span><span class="hljs-params">(response)</span>:</span>
+
+    everypost_orders = response.json()
+    parent_count = len(everypost_orders)
+    out_list = []
+    <span class="hljs-keyword">for</span> m <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,parent_count):
+        child_count = len(everypost_orders[m])
+        <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,child_count):
+            out_dict = {}
+            <span class="hljs-keyword">if</span> everypost_orders[m][n][<span class="hljs-string">'data_class_name'</span>] == <span class="hljs-string">'Location'</span>:
+                out_dict = everypost_orders[m][n][<span class="hljs-string">'data'</span>]
+                out_dict[<span class="hljs-string">'farm_uuid'</span>] = everypost_orders[m][n][<span class="hljs-string">'farm_uuid'</span>]
+                out_list.append([out_dict])
+    <span class="hljs-keyword">return</span>(out_list)
+</div></code></pre>
+<h3>4.2 AWS Lambdaの設定</h3>
+<p>ToDo：設計図を用いたLambda関数の作成、ダウンロードしたzipファイルのアップロード</p>
+
+</body>
+</html>
