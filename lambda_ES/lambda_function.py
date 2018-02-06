@@ -21,13 +21,12 @@ from boto3.dynamodb.types import TypeDeserializer
 # The following parameters are required to configure the ES cluster
 ES_ENDPOINT = 'YOUR-ENDPOINT.eu-west-1.es.amazonaws.com'
 
-
 # The following parameters can be optionally customized
 DOC_TABLE_FORMAT = '{}'         # Python formatter to generate index name from the DynamoDB table name
 DOC_TYPE_FORMAT = '{}_type'     # Python formatter to generate type name from the DynamoDB table name, default is to add '_type' suffix
 ES_REGION = None                # If not set, use the runtime lambda region
 ES_MAX_RETRIES = 3              # Max number of retries for exponential backoff
-DEBUG = True                    # Set verbose debugging information
+DEBUG = False                    # Set verbose debugging information
 
 print("Streaming to ElasticSearch")
 logger = logging.getLogger()
@@ -178,13 +177,11 @@ def _lambda_handler(event, context):
             # Deserialize DynamoDB type to Python types
             doc_fields = ddb_deserializer.deserialize({'M': ddb['NewImage']})
             # Add metadata
-            doc_fields['@timestamp'] = now.isoformat()
-            doc_fields['@SequenceNumber'] = doc_seq
+            doc_fields['@timestamp'] = doc_fields['at']
 
             # lattitude + longitude
-            #lat_lng = str(doc_fields['latitude']) + ',' + str(doc_fields['longitude'])
-            #doc_fields['lat_lng'] = str(lat_lng)
-            doc_fields['lat_lng'] = {'lat':str(doc_fields['latitude']),'lon':str(doc_fields['longitude'])}
+            lat_lng = str(doc_fields['latitude']) + ',' + str(doc_fields['longitude'])
+            doc_fields['location'] = str(lat_lng)
             logger.debug('doc_fields: %s', doc_fields)
 
             # Generate JSON payload
@@ -205,12 +202,11 @@ def _lambda_handler(event, context):
     es_actions.append('')  # Add one empty line to force final \n
     es_payload = '\n'.join(es_actions)
     logger.debug('Payload: %s', es_payload)
-
+    
     logger.info('Posting to ES: inserts=%s updates=%s deletes=%s, total_lines=%s, bytes_total=%s',
                 cnt_insert, cnt_modify, cnt_remove, len(es_actions) - 1, len(es_payload))
-
+    
     post_to_es(es_payload)  # Post to ES with exponential backoff
-
 
 # Global lambda handler - catches all exceptions to avoid dead letter in the DynamoDB Stream
 def lambda_handler(event, context):

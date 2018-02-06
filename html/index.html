@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>JDMCハンズオン</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://bootswatch.com/4/darkly/bootstrap.min.css" media="screen">
+  </head>
+  <body>
+    <!-- Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">JDMCハンズオン</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container" style="padding:20px 0 0 0">
+      <h3>センサーデータの取得</h3><br>
+        <form method="POST" action="https://1puwf45k1f.execute-api.ap-northeast-1.amazonaws.com/prod/everysense_post">
+          <div class="form-group">
+            <label>ファームUUID</label>
+            <input type="text" class="form-control" name="recipe_uuid" placeholder="Recipe UUID">
+            <label>セッションKEY</label>
+            <input type="text" class="form-control" name="session_key" placeholder="Session Key">
+          </div>
+          <input class="btn btn-primary btn-lg" type="submit" value="データ取得"  />
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  </body>
+</html>

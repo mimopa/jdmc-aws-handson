@@ -4,16 +4,12 @@ import boto3
 import urllib
 import time
 import decimal
-import logging
 
 from datetime import datetime, timedelta, timezone
 from dateutil import parser
 
 # DynamoDBオブジェクト
 dynamodb = boto3.resource('dynamodb')
-# レシピUUID：固定
-# ！！！github等にコミットする際は、記載したままにしないこと！
-RECIPIE_UUID = ''
 # エブリセンスのデータ出力APIエンドポイント
 EVS_ROOT_URL = 'https://api.every-sense.com:8001/get_output_data'
 # 連番を更新して更新して返す更新して返す関数
@@ -38,22 +34,21 @@ def everypost_handler(event, context):
         
         # フォームに入力されたデータを得る
         param = urllib.parse.parse_qs(event['body'])
+        #print(event['body'])
         # paramが取得取得できなかった場合、JSONとして処理処理しないとだめ？
-        # HTMLのWebフォームからPOSTした場合と、AJAXでPOST（JSON形式）した場合で取得方法が異なるっぽい
+        # AJAXでPOST（JSON形式）した場合（True）と、HTMLのWebフォームからPOSTした場合（False）で取得方法が異なる
         if param == "" and isinstance(event['body'], str):
             body = json.loads(event['body'])
-            input_login_name = body['input_login_name']
-            input_login_pass = body['input_login_pass']
+            recipe_uuid = body['recipe_uuid']
+            session_key = body['session_key']
         else:
-            input_login_name = param['input_login_name'][0]
-            input_login_pass = param['input_login_pass'][0]
+            recipe_uuid = param['recipe_uuid']
+            session_key = param['session_key']
         
-        # クライアントのIPを得る
-        host = event['requestContext']['identity']['sourceIp']
-        
-        # エブリセンスのAPIを叩いて、データを取得
+        # エブリセンス社のデータ出力APIを叩いて、データを取得
+        # ToDoセッションキーを用いた認証に切り替える
         response = make_EVS_request(
-            {"login_name" : input_login_name, "password" : input_login_pass}
+            {"session_key" : session_key, "recipe_uuid" : recipe_uuid}
         )
         # レスポンスから、JSONデータを解析
         output = retrieve_json_date(response)
@@ -97,12 +92,11 @@ def everypost_handler(event, context):
             'body' : '<!DOCTYPE html><html><head><meta charset="UTF-8"></head><body>内部エラーが発生しました。</body></html>'
         }
 
-def make_EVS_request(params=None,recipie_UUID=RECIPIE_UUID,root_dir=EVS_ROOT_URL):
+def make_EVS_request(params=None,root_dir=EVS_ROOT_URL):
 
     if params is None:
         params = {}
-    # POSTリクエスト作成
-    params['recipe_uuid'] = recipie_UUID
+    # POSTリクエスト作成（固定部分）
     params['keep'] = 'true'
     params['limit'] = 2000
     params['format'] = 'JSON'
