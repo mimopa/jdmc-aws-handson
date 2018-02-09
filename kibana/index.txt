@@ -1,0 +1,40 @@
+DELETE sensordata
+
+PUT sensordata
+{
+  "mappings": {
+    "sensordata_type": {
+      "properties": {
+        "@timestamp": {
+          "type": "date",
+          "format": "YYYY-MM-dd HH:mm:ss"
+        },
+        "at": {
+          "type": "date",
+          "format": "YYYY-MM-dd HH:mm:ss"
+        },
+        "farm_uuid": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "id": {
+          "type": "float"
+        },
+        "latitude": {
+          "type": "float"
+        },
+        "location": {
+          "type": "geo_point"
+        },
+        "longitude": {
+          "type": "float"
+        }
+      }
+    }
+  }
+}
