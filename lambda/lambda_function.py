@@ -12,7 +12,7 @@ from dateutil import parser
 dynamodb = boto3.resource('dynamodb')
 # エブリセンスのデータ出力APIエンドポイント
 EVS_ROOT_URL = 'https://api.every-sense.com:8001/get_output_data'
-# 連番を更新して更新して返す更新して返す関数
+# 連番を更新して返す関数
 def next_seq(table, tablename):
     response = table.update_item(
         Key={
