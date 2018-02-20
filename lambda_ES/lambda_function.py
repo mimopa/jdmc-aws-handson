@@ -5,11 +5,8 @@ import logging
 import os
 import time
 import traceback
-#import urllib
 import urllib.parse
 from urllib.parse import urlparse
-#from urlparse import urlparse
-
 from botocore.auth import SigV4Auth
 from botocore.awsrequest import AWSRequest
 from botocore.credentials import get_credentials
@@ -17,30 +14,27 @@ from botocore.endpoint import BotocoreHTTPSession
 from botocore.session import Session
 from boto3.dynamodb.types import TypeDeserializer
 
-
-# The following parameters are required to configure the ES cluster
+# Elasticsearch Serviceのエンドポイントを設定
 ES_ENDPOINT = 'YOUR-ENDPOINT.eu-west-1.es.amazonaws.com'
 
 # The following parameters can be optionally customized
-DOC_TABLE_FORMAT = '{}'         # Python formatter to generate index name from the DynamoDB table name
-DOC_TYPE_FORMAT = '{}_type'     # Python formatter to generate type name from the DynamoDB table name, default is to add '_type' suffix
-ES_REGION = None                # If not set, use the runtime lambda region
-ES_MAX_RETRIES = 3              # Max number of retries for exponential backoff
-DEBUG = False                    # Set verbose debugging information
+DOC_TABLE_FORMAT = '{}'         # DynamoDBテーブル名からインデックス名を生成するためのフォーマッタ
+DOC_TYPE_FORMAT = '{}_type'     # DynamoDBテーブル名から型名を生成するため、デフォルトで'_type'を付加
+ES_REGION = None                # 設定しない（None）場合は、Lambdaが実行されているリージョンが設定される
+ES_MAX_RETRIES = 3              # エラー発生時のエクスポネンシャルバックオフのための最大試行回数
+DEBUG = False                   # デバッグ情報をログ出力する設定
 
 print("Streaming to ElasticSearch")
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG if DEBUG else logging.INFO)
 
-
-# Subclass of boto's TypeDeserializer for DynamoDB to adjust for DynamoDB Stream format.
+# botoのTypeDeserializerのサブクラスとして、DynamoDBがDynamoDBストリーム形式を調整。
 class StreamTypeDeserializer(TypeDeserializer):
     def _deserialize_n(self, value):
         return float(value)
 
     def _deserialize_b(self, value):
-        return value  # Already in Base64
-
+        return value
 
 class ES_Exception(Exception):
     '''Exception capturing status_code from Client Request'''
@@ -52,8 +46,7 @@ class ES_Exception(Exception):
         self.payload = payload
         Exception.__init__(self, 'ES_Exception: status_code={}, payload={}'.format(status_code, payload))
 
-
-# Low-level POST data to Amazon Elasticsearch Service generating a Sigv4 signed request
+# Amazon Elasticsearchサービスへの低レベルのPOSTデータによりSigv4署名付きリクエストが生成される
 def post_data_to_es(payload, region, creds, host, path, method='POST', proto='https://'):
     '''Post data to ES endpoint with SigV4 signed http headers'''
     req = AWSRequest(method=method, url=proto + host + urllib.parse.quote(path), data=payload, headers={'Host': host,'Content-Type' : 'application/json'})
@@ -65,20 +58,19 @@ def post_data_to_es(payload, region, creds, host, path, method='POST', proto='ht
     else:
         raise ES_Exception(res.status_code, res._content)
 
-
-# High-level POST data to Amazon Elasticsearch Service with exponential backoff
-# according to suggested algorithm: http://docs.aws.amazon.com/general/latest/gr/api-retries.html
+# エクスポネンシャルアルゴリズムを使用してAmazon Elasticsearch Serviceへ登録
+# AWS公式サイトから提案されたアルゴリズムに従う : http://docs.aws.amazon.com/general/latest/gr/api-retries.html
 def post_to_es(payload):
     '''Post data to ES cluster with exponential backoff'''
 
-    # Get aws_region and credentials to post signed URL to ES
+    # 署名されたURLをESに登録するため、aws_regionと認証情報を取得する
     es_region = ES_REGION or os.environ['AWS_REGION']
     session = Session({'region': es_region})
     creds = get_credentials(session)
     es_url = urlparse(ES_ENDPOINT)    
-    es_endpoint = es_url.netloc or es_url.path  # Extract the domain name in ES_ENDPOINT
+    es_endpoint = es_url.netloc or es_url.path  # ESのエンドポイントでドメインを抽出
 
-    # Post data with exponential backoff
+    # エクスポネンシャルバックオフによるデータの登録
     retries = 0
     while retries < ES_MAX_RETRIES:
         if retries > 0:
@@ -93,32 +85,28 @@ def post_to_es(payload):
 
             if es_ret['errors']:
                 logger.error('ES post unsuccessful, errors present, took=%sms', es_ret['took'])
-                # Filter errors
                 es_errors = [item for item in es_ret['items'] if item.get('index').get('error')]
                 logger.error('List of items with errors: %s', json.dumps(es_errors))
             else:
                 logger.info('ES post successful, took=%sms', es_ret['took'])
-            break  # Sending to ES was ok, break retry loop
+            break  # ESへの登録が完了したら、リトライループを中断
         except ES_Exception as e:
             if (e.status_code >= 500) and (e.status_code <= 599):
-                retries += 1  # Candidate for retry
+                retries += 1  # 再試行カウント
             else:
-                raise  # Stop retrying, re-raise exception
+                raise  # 再試行を停止し、例外を再発行
 
-
-# Extracts the DynamoDB table from an ARN
-# ex: arn:aws:dynamodb:eu-west-1:123456789012:table/table-name/stream/2015-11-13T09:23:17.104 should return 'table-name'
+# ARNからDynamoDBテーブルを抽出
+# 例: arn:aws:dynamodb:eu-west-1:123456789012:table/sensordata/stream/2015-11-13T09:23:17.104 should return 'sensordata'
 def get_table_name_from_arn(arn):
     return arn.split(':')[5].split('/')[1]
 
-
-# Compute a compound doc index from the key(s) of the object in lexicographic order: "k1=key_val1|k2=key_val2"
+# オブジェクトのキーから、辞書順に複合文書インデックスを計算。 "k1 = key_val1 | k2 = key_val2"
 def compute_doc_index(keys_raw, deserializer):
     index = []
     for key in sorted(keys_raw):
         index.append('{}={}'.format(key, deserializer.deserialize(keys_raw[key])))
     return '|'.join(index)
-
 
 def _lambda_handler(event, context):
     logger.debug('Event: %s', event)
@@ -126,11 +114,11 @@ def _lambda_handler(event, context):
     now = datetime.datetime.utcnow()
 
     ddb_deserializer = StreamTypeDeserializer()
-    es_actions = []  # Items to be added/updated/removed from ES - for bulk API
+    es_actions = []  # ESから追加/更新/削除されるアイテム - バルクAPI用
     cnt_insert = cnt_modify = cnt_remove = 0
 
     for record in records:
-        # Handle both native DynamoDB Streams or Streams data from Kinesis (for manual replay)
+        # DynamoDB StreamsまたはKinesisからのStreamsデータの両方を処理する
         logger.debug('Record: %s', record)
         if record.get('eventSource') == 'aws:dynamodb':
             ddb = record['dynamodb']
@@ -144,21 +132,21 @@ def _lambda_handler(event, context):
             logger.error('Ignoring non-DynamoDB event sources: %s', record.get('eventSource'))
             continue
 
-        # Compute DynamoDB table, type and index for item
-        doc_table = DOC_TABLE_FORMAT.format(ddb_table_name.lower())  # Use formatter
-        doc_type = DOC_TYPE_FORMAT.format(ddb_table_name.lower())    # Use formatter
+        # DynamoDBテーブルから、項目の型とインデックスを取得。
+        doc_table = DOC_TABLE_FORMAT.format(ddb_table_name.lower())
+        doc_type = DOC_TYPE_FORMAT.format(ddb_table_name.lower())
         doc_index = compute_doc_index(ddb['Keys'], ddb_deserializer)
 
-        # Dispatch according to event TYPE
+        # イベントタイプに応じた処理
         event_name = record['eventName'].upper()  # INSERT, MODIFY, REMOVE
         logger.debug('doc_table=%s, event_name=%s, seq=%s', doc_table, event_name, doc_seq)
         logger.debug('doc_index=%s', doc_index)
 
-        # Treat events from a Kinesis stream as INSERTs
+        # KinesisストリームのイベントをINSERTとして処理する
         if event_name == 'AWS:KINESIS:RECORD':
             event_name = 'INSERT'
 
-        # Update counters
+        # イベントカウンタの更新
         if event_name == 'INSERT':
             cnt_insert += 1
         elif event_name == 'MODIFY':
@@ -168,47 +156,49 @@ def _lambda_handler(event, context):
         else:
             logger.warning('Unsupported event_name: %s', event_name)
 
-        # If DynamoDB INSERT or MODIFY, send 'index' to ES
+        # DynamoDBへの追加/更新は'index'としてESへ登録
         if (event_name == 'INSERT') or (event_name == 'MODIFY'):
             if 'NewImage' not in ddb:
                 logger.warning('Cannot process stream if it does not contain NewImage')
                 continue
             logger.debug('NewImage: %s', ddb['NewImage'])
-            # Deserialize DynamoDB type to Python types
+            # DynamoDB型をPython型にデシリアライズする
             doc_fields = ddb_deserializer.deserialize({'M': ddb['NewImage']})
-            # Add metadata
-            doc_fields['@timestamp'] = doc_fields['at']
 
-            # lattitude + longitude
-            lat_lng = str(doc_fields['latitude']) + ',' + str(doc_fields['longitude'])
-            doc_fields['location'] = str(lat_lng)
+            # 位置情報の設定
+            location = {}
+            coordinates = []
+            coordinates.append(doc_fields['longitude'])
+            coordinates.append(doc_fields['latitude'])
+            location['coordinates'] = coordinates
+            doc_fields['geometry'] = location
             logger.debug('doc_fields: %s', doc_fields)
 
-            # Generate JSON payload
+            # JSONペイロードの生成
             doc_json = json.dumps(doc_fields)
             logger.debug('doc_json: %s', doc_json)
 
-            # Generate ES payload for item
+            # ESペイロードの生成
             action = {'index': {'_index': doc_table, '_type': doc_type, '_id': doc_index}}
-            es_actions.append(json.dumps(action))  # Action line with 'index' directive
-            es_actions.append(doc_json)            # Payload line
+            es_actions.append(json.dumps(action))  # 'index'ディレクティブ付きのaction行
+            es_actions.append(doc_json)            # ペイロード本体
 
-        # If DynamoDB REMOVE, send 'delete' to ES
+        # DynamoDBから削除された場合、'delete'としてESに登録
         elif event_name == 'REMOVE':
             action = {'delete': {'_index': doc_table, '_type': doc_type, '_id': doc_index}}
             es_actions.append(json.dumps(action))
 
-    # Prepare bulk payload
-    es_actions.append('')  # Add one empty line to force final \n
+    # bulkペイロードの準備
+    es_actions.append('')  # 空行の追加と改行の設定
     es_payload = '\n'.join(es_actions)
     logger.debug('Payload: %s', es_payload)
     
     logger.info('Posting to ES: inserts=%s updates=%s deletes=%s, total_lines=%s, bytes_total=%s',
                 cnt_insert, cnt_modify, cnt_remove, len(es_actions) - 1, len(es_payload))
     
-    post_to_es(es_payload)  # Post to ES with exponential backoff
+    post_to_es(es_payload)
 
-# Global lambda handler - catches all exceptions to avoid dead letter in the DynamoDB Stream
+# グローバルラムダハンドラとしてすべての例外をキャッチし、DynamoDBストリームのデッドレターを回避する
 def lambda_handler(event, context):
     try:
         return _lambda_handler(event, context)
