@@ -46,12 +46,11 @@ def everypost_handler(event, context):
             session_key = param['session_key']
         
         # エブリセンス社のデータ出力APIを叩いて、データを取得
-        # ToDoセッションキーを用いた認証に切り替える
         response = make_EVS_request(
             {"session_key" : session_key, "recipe_uuid" : recipe_uuid}
         )
         # レスポンスから、JSONデータを解析
-        output = retrieve_json_date(response)
+        output = retrieve_json_data(response)
         
         # DynamoDBのテーブルインスタンス作成(sensordataテーブル)
         sensortable = dynamodb.Table("sensordata")
@@ -106,7 +105,7 @@ def make_EVS_request(params=None,root_dir=EVS_ROOT_URL):
     every_response = requests.post(root_dir, data=json_param,headers={'Content-Type': 'application/json'})
     return every_response
 
-def retrieve_json_date(response):
+def retrieve_json_data(response):
     # レスポンスからデータ抜き出し
     # ToDo：ファームUUIDの取得により、可視化時に自分（特定）のデータを選択可能とする
     everypost_orders = response.json()
