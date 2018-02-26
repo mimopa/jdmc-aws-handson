@@ -13,7 +13,7 @@ from sklearn import preprocessing
 # csvを読み込んだ時点で、見出し等も決めておく
 # index=都市の数
 # columns=都市ID（文字列→数値に変換）,項目ID（気温、雨量、など色々文字列→数値に変換）,2017/12/01 1:00から1時間ごとに2018/02/20 0:00まで1943列
-dataset = pd.read_csv('saitama.csv', encoding="cp932", header=1)
+dataset = pd.read_csv('chiba.csv', encoding="cp932", header=1)
 dataset1 = dataset.drop([2,3])
 dataset2 = dataset1.drop(1)
 # 品質情報を含む列を取得
@@ -29,9 +29,10 @@ ds3.dropna(thresh=3, axis=0,inplace = True)
 ds3.reset_index(drop=True, inplace=True)
 
 ds4 = ds3.drop(2,axis=1)
-ds4.drop(ds4.index[ds4[0] == "堂平"]|ds4.index[ds4[0] == "飯能"]|ds4.index[ds4[0] == "三峰"]|ds4.index[ds4[0] == "鴻巣"]|ds4.index[ds4[0] == "浦山"]|ds4.index[ds4[0] == "上吉田"]|ds4.index[ds4[0] == "ときがわ"],inplace = True)
-#ds4.drop(ds4.index[ds4[0] == "堂平"]|ds4.index[ds4[0] == "飯能"]|ds4.index[ds4[0] == "三峰"]|ds4.index[ds4[0] == "鴻巣"]|ds4.index[ds4[0] == "浦山"]|ds4.index[ds4[0] == "上吉田"]|ds4.index[ds4[0] == "ときがわ"],inplace = True)
+ds4.drop(ds4.index[ds4[0] == "東庄"]|ds4.index[ds4[0] == "鋸南"]|ds4.index[ds4[0] == "大多喜"],inplace = True)
+#ds5 = ds4.drop(ds4[0] == "東庄"|ds4[0] == "鋸南"|ds4[0] == "大多喜")
 ds5 = ds4.T
+ds5['City'] = pd.Series( '香取', index=ds5.index )
 
 ds6 = ds5.T
 ds7 = ds6[:5]
@@ -43,6 +44,9 @@ ds12 = ds6[23:27]
 ds13 = ds6[27:31]
 ds14 = ds6[31:35]
 
+# 転置後のds6を行で分割して、年月時刻をそれぞれのdataframeに挿入していく
+
+
 # csvで出力
 ds5.to_csv('test.csv', encoding='utf-8')
 
@@ -50,6 +54,7 @@ ds5.to_csv('test.csv', encoding='utf-8')
 # 気温、降水量、風速、風向き
 
 # ↓はテスト用
+
 # calumnをリネームする
 ds3.columns = ['City','Type','2017/12/01 1:00','2017/12/01 2:00','2017/12/01 3:00','2017/12/01 4:00',]
 
