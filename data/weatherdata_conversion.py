@@ -21,7 +21,7 @@ ds = dataset.T
 # 元データとする
 ds.drop(ds.index[ds[3] == '品質情報']|ds.index[ds[3] == '均質番号']|ds.index[ds[3] == '現象なし情報'],inplace = True)
 # 気温だけ抜き出す
-ds2 = ds[ds[1].str.contains('年月日時') | ds[1].str.contains("気温") | ds[1].str.contains("降水量") | ds[1].str.contains("降雪") | ds[1].str.contains("風速")]
+ds2 = ds[ds[1].str.contains('年月日時') | ds[1].str.contains("気温") | ds[1].str.contains("降水量") | ds[1].str.contains("風速")]
 
 # NaNを消す
 ds3 = ds2.dropna(how='all', axis=1)
@@ -30,11 +30,26 @@ ds3.reset_index(drop=True, inplace=True)
 
 ds4 = ds3.drop(2,axis=1)
 ds4.drop(ds4.index[ds4[0] == "東庄"]|ds4.index[ds4[0] == "鋸南"]|ds4.index[ds4[0] == "大多喜"],inplace = True)
-
 #ds5 = ds4.drop(ds4[0] == "東庄"|ds4[0] == "鋸南"|ds4[0] == "大多喜")
 ds5 = ds4.T
 ds5['City'] = pd.Series( '香取', index=ds5.index )
+
 ds6 = ds5.T
+ds7 = ds6[:5]
+ds8 = ds6[5:9]
+ds9 = ds6[9:13]
+ds10 = ds6[13:18]
+ds11 = ds6[18:23]
+ds12 = ds6[23:27]
+ds13 = ds6[27:31]
+ds14 = ds6[31:35]
+
+# 転置後のds6を行で分割して、年月時刻をそれぞれのdataframeに挿入していく
+
+
+# csvで出力
+ds5.to_csv('test.csv', encoding='utf-8')
+
 
 # 気温、降水量、風速、風向き
 
