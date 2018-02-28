@@ -1,0 +1,3 @@
+自分でLambda関数を作成する場合、Lambda関数を格納したディレクトリ配下で下記コマンドを実行。
+
+pip install -r requirements.txt -t .
