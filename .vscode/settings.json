@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "C:\\Users\\msc\\Anaconda3\\envs\\env\\python.exe"
+    "python.pythonPath": "C:\\Users\\terauchi\\Anaconda3\\envs\\tensorflow\\python.exe",
+    "python.linting.enabled": false
 }

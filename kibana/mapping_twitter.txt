@@ -1,0 +1,59 @@
+DELETE sensordata
+DELETE tweet
+
+PUT sensordata
+{
+  "mappings": {
+    "sensordata_type": {
+      "properties": {
+        "at": {
+          "type": "date",
+          "format": "YYYY-MM-dd HH:mm:ss"
+        },
+        "farm_uuid": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "geometry": {
+          "properties": {
+            "coordinates": {
+              "type": "geo_point"
+            }
+          }
+        },
+        "id": {
+          "type": "float"
+        },
+        "latitude": {
+          "type": "float"
+        },
+        "longitude": {
+          "type": "float"
+        }
+      }
+    }
+  }
+}
+
+PUT tweet
+{
+  "mappings": {
+    "tweet": {
+      "properties": {
+        "created_at": {
+          "type": "date",
+          "format": "YYYY-MM-dd HH:mm:ss"
+        },
+        "text" : {
+          "type" : "text"
+        }
+      }
+    }
+  }
+}
+

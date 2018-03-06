@@ -97,7 +97,7 @@ def make_EVS_request(params=None,root_dir=EVS_ROOT_URL):
         params = {}
     # POSTリクエスト作成（固定部分）
     params['keep'] = 'true'
-    params['limit'] = 2000
+    params['limit'] = 500
     params['format'] = 'JSON'
     params['from'] = '2017-12-28 15:00:00 UTC'
     params['to'] = '2018-03-31 23:10:00 UTC'
