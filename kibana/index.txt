@@ -5,10 +5,6 @@ PUT sensordata
   "mappings": {
     "sensordata_type": {
       "properties": {
-        "@timestamp": {
-          "type": "date",
-          "format": "YYYY-MM-dd HH:mm:ss"
-        },
         "at": {
           "type": "date",
           "format": "YYYY-MM-dd HH:mm:ss"
@@ -22,14 +18,18 @@ PUT sensordata
             }
           }
         },
+        "geometry": {
+          "properties": {
+            "coordinates": {
+              "type": "geo_point"
+            }
+          }
+        },
         "id": {
           "type": "float"
         },
         "latitude": {
           "type": "float"
-        },
-        "location": {
-          "type": "geo_point"
         },
         "longitude": {
           "type": "float"
